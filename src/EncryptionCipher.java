@@ -5,22 +5,22 @@ public class EncryptionCipher extends Cipher {
     // 1. Encryption when there's a key => make encryptedMsg
     public EncryptionCipher(String key, String msg) throws Exception {
         this.key = key.toLowerCase();
-        this.msg = msg;
-
         keyMapping("encryption");
-        makeEncryptedMsg();
+        
+        this.msg = msg;
+        this.encryptedMsg = makeEncryptedMsg();
     }
 
     // 2. Encryption when there's not a key => create random key && make encryptedMsg
     public EncryptionCipher(String msg) throws Exception {
-        createRandomKey();
-        this.msg = msg;
-
+        this.key = createRandomKey();
         keyMapping("encryption");
-        makeEncryptedMsg();
+        
+        this.msg = msg;
+        this.encryptedMsg = makeEncryptedMsg();
     }
 
-    private void makeEncryptedMsg() {
+    private String makeEncryptedMsg() {
         StringBuilder sb = new StringBuilder();
         
         char[] msgArr = msg.toCharArray();
@@ -34,10 +34,10 @@ public class EncryptionCipher extends Cipher {
             }
         }
 
-        encryptedMsg = sb.toString();
+        return sb.toString();
     }
 
-    private void createRandomKey() {
+    private String createRandomKey() {
         StringBuilder sb = new StringBuilder();
 
         SecureRandom sr = new SecureRandom();
@@ -53,6 +53,6 @@ public class EncryptionCipher extends Cipher {
             }
         }
 
-        key = sb.toString();
+        return sb.toString();
     }
 }

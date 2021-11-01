@@ -2,19 +2,22 @@ public class DecryptionCipher extends Cipher {
     // 1. Decryption when there's a key => make msg
     public DecryptionCipher(String key, String encryptedMsg) throws Exception {
         this.key = key.toLowerCase();
-        this.encryptedMsg = encryptedMsg;
-
         keyMapping("decryption");
-        makeMsg();
+
+        this.encryptedMsg = encryptedMsg;
+        this.msg = makeMsg();
     }
 
     // 2. Decryption when there's not a key => find key (break cipher) && make msg
-    public DecryptionCipher(String encryptedMsg) {
-        
+    public DecryptionCipher(String encryptedMsg) throws Exception {
+        this.key = Break.findKey(msg);
+        keyMapping("decryption");
+
         this.encryptedMsg = encryptedMsg;
+        this.msg = makeMsg();
     }
 
-    private void makeMsg() {
+    private String makeMsg() {
         StringBuilder sb = new StringBuilder();
         
         char[] encryptedMsgArr = encryptedMsg.toCharArray();
@@ -28,6 +31,6 @@ public class DecryptionCipher extends Cipher {
             }
         }
 
-        msg = sb.toString();
+        return sb.toString();
     }
 }

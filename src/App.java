@@ -26,13 +26,24 @@ public class App {
 
     public static void testDC1() {
         try {
-            DecryptionCipher ec = new DecryptionCipher(key, encryptedMsg);
-            System.out.println(ec.getMsg());
+            DecryptionCipher dc = new DecryptionCipher(key, encryptedMsg);
+            System.out.println(dc.getMsg());
+        } catch (Exception e) { System.out.println("The key must be 26 digits"); }
+    }
+
+    public static void testDC2() {
+        try {
+            DecryptionCipher dc = new DecryptionCipher(encryptedMsg);
+            System.out.println(dc.getMsg());
+            System.out.println("(Key: " + dc.getKey() + ")");
         } catch (Exception e) { System.out.println("The key must be 26 digits"); }
     }
 
     public static void main(String[] args) throws Exception {
-        testDC1();
+        // testEC1();
+        // testEC2();
+        // testDC1();
+        // testDC2();
     }
 }
 
