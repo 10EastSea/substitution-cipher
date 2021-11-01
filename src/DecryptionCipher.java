@@ -5,8 +5,10 @@ public class DecryptionCipher extends Cipher {
         this.encryptedMsg = encryptedMsg;
     }
 
-    // 1. Decryption when there's not a key => find key (break cipher) && make msg
+    // 2. Decryption when there's not a key => find key (break cipher) && make msg
     public DecryptionCipher(String encryptedMsg) {
         this.encryptedMsg = encryptedMsg;
     }
+
+
 }

@@ -43,8 +43,16 @@ public class EncryptionCipher extends Cipher {
         SecureRandom sr = new SecureRandom();
         sr.setSeed(new Date().getTime());
 
-        // create key...
+        for(int i=0; i<26; ) {
+            char c = (char) (sr.nextInt(26) + 'a');
+            
+            if(sb.toString().contains(c + "")) continue;
+            else {
+                sb.append(c);
+                i++;
+            }
+        }
 
-        key = "msnuecripzbdafghjkltqvwxyo";
+        key = sb.toString();
     }
 }
