@@ -7,7 +7,7 @@ public class EncryptionCipher extends Cipher {
         this.key = key.toLowerCase();
         this.msg = msg;
 
-        keyMapping();
+        keyMapping("encryption");
         makeEncryptedMsg();
     }
 
@@ -16,7 +16,7 @@ public class EncryptionCipher extends Cipher {
         createRandomKey();
         this.msg = msg;
 
-        keyMapping();
+        keyMapping("encryption");
         makeEncryptedMsg();
     }
 
