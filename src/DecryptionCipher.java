@@ -1,6 +1,6 @@
 public class DecryptionCipher extends Cipher {
     // 1. Decryption when there's a key => make msg
-    public DecryptionCipher(String key, String encryptedMsg) throws Exception {
+    public DecryptionCipher(String key, String encryptedMsg) throws KeyException {
         this.key = key.toLowerCase();
         keyMapping("decryption");
 
@@ -9,7 +9,7 @@ public class DecryptionCipher extends Cipher {
     }
 
     // 2. Decryption when there's not a key => find key (break cipher) && make msg
-    public DecryptionCipher(String encryptedMsg) throws Exception {
+    public DecryptionCipher(String encryptedMsg) throws KeyException {
         this.key = Break.findKey(msg);
         keyMapping("decryption");
 

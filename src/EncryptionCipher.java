@@ -3,7 +3,7 @@ import java.util.Date;
 
 public class EncryptionCipher extends Cipher {
     // 1. Encryption when there's a key => make encryptedMsg
-    public EncryptionCipher(String key, String msg) throws Exception {
+    public EncryptionCipher(String key, String msg) throws KeyException {
         this.key = key.toLowerCase();
         keyMapping("encryption");
         
@@ -12,7 +12,7 @@ public class EncryptionCipher extends Cipher {
     }
 
     // 2. Encryption when there's not a key => create random key && make encryptedMsg
-    public EncryptionCipher(String msg) throws Exception {
+    public EncryptionCipher(String msg) throws KeyException {
         this.key = createRandomKey();
         keyMapping("encryption");
         

@@ -39,13 +39,56 @@ public class App {
         } catch (Exception e) { System.out.println("The key must be 26 digits"); }
     }
 
+    public static void help(String msg) {
+        System.out.println("\n" + msg + "\n");
+        System.out.println("    -e <message> : Encrypt the message => {encrypted message}");
+        System.out.println("                                          (Key: {key})");
+        // System.out.println("    -d <message> : Decrypt the message => {decrypted message}"); // break cipher
+        // System.out.println("                                          (Key: {key})");
+        System.out.println("    -e-key <key> <message> : Encrypt the message using key => {encrypted message}");
+        System.out.println("    -d-key <key> <message> : Decrypt the message using key => {decrypted message}");
+        System.out.println();
+        System.out.println("    -help : how to use it");
+        System.out.println();
+    }
+
     public static void main(String[] args) throws Exception {
-        // testEC1();
-        // testEC2();
-        // testDC1();
-        // testDC2();
+        if(args.length < 1) { help("Please enter the [FLAG]\nThe following flag provides the values in { .. }"); return; }
+
+        if(args[0].equals("-e")) {
+            if(args.length < 2) { help("[-e]: Please enter the <message>"); return; }
+            try {
+                EncryptionCipher ec = new EncryptionCipher(args[1]);
+                System.out.println(ec.getEncryptedMsg());
+                System.out.println("(Key: " + ec.getKey() + ")");
+            } catch(NullPointerException npe) { help("[-e]: This program only supports English"); return; }
+        } else if(args[0].equals("-d")) {
+            if(args.length < 2) { help("[-d]: Please enter the <message>"); return; }
+            System.out.println("Sorry, this function is being prepared..");
+        } else if(args[0].equals("-e-key")) {
+            if(args.length < 3) { help("[-e-key]: Please enter the <key> and <message>"); return; }
+            try {
+                EncryptionCipher ec = new EncryptionCipher(args[1], args[2]);
+                System.out.println(ec.getEncryptedMsg());
+            }
+            catch(NullPointerException npe) { help("[-e-key]: This program only supports English"); return; }
+            catch(KeyException e) { help("[-e-key]: <key> must consist of 26 different alphabets (Length: 26)"); return; }
+        } else if(args[0].equals("-d-key")) {
+            if(args.length < 3) { help("[-d-key]: Please enter the <key> and <message>"); return; }
+            try {
+                DecryptionCipher dc = new DecryptionCipher(args[1], args[2]);
+                System.out.println(dc.getMsg());
+            }
+            catch(NullPointerException npe) { help("[-d-key]: This program only supports English"); return; }
+            catch(KeyException e) { help("[-d-key]: <key> must consist of 26 different alphabets (Length: 26)"); return; }
+        }
+
+        else if(args[0].equals("-help")) { help("Usage: java App [FALG]\nThe following flag provides the values in { .. }"); return; }
+        else { help("This [FLAG] does not exist\nThe following flag provides the values in { .. }"); return; }
     }
 }
 
 // toLowerCase() mode
 // toUpperCase() mode
+
+// File IO version
